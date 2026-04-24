@@ -1,0 +1,803 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap');
+
+
+/* ============================================================
+   RESET
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+
+:root {
+  --bg: #EEE9E0;
+  --surface: #EEE9E0;
+  --surface-warm: rgba(218, 210, 195, 0.2);
+
+  --teal: #2a9d8f;
+  --teal-light: rgba(42, 157, 143, 0.4);
+  --teal-dim: #1f7268;
+
+  --orange: #e36c44;
+  --orange-light: #fff1e6;
+  --orange-dim: #C7522B;
+
+  --text: #1a1a18;
+  --muted: #7a7870;
+  --border: #e8e6e0;
+  --border-warm: #f0ebe3;
+
+  --font-body: 1.25rem;
+  --headerFont: 1.75rem;
+  --titleFont: 6rem;
+}
+
+
+/* ============================================================
+   BASE
+   ============================================================ */
+body {
+  background-color: var(--surface-warm);
+  color: var(--text);
+  font-family: 'Jost', sans-serif;
+  min-height: 100vh;
+  /* remove display: flex entirely — it's fighting with .page */
+}
+
+
+/* ============================================================
+   NAVBAR
+   ============================================================ */
+
+.navbar {
+  position: fixed;
+  /* bottom: 0; */
+  left: 0;
+  width: 100%;
+  top: 40%;
+  font-size: var(--headerFont);
+  /* right: 0; */
+  z-index: 1000;
+  display: flex;
+  flex-direction: row;
+
+  /* height: 5rem; */
+  /* align-items: fle; */
+  /* justify-content: flex-end; */
+  /* background-color: var(--teal); */
+  padding: 0.5rem;
+}
+.navbar-background{
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: 6px;
+  align-self: left;
+  background: linear-gradient(to right, var(--teal), var(--orange));
+  animation: fadeUp 0.8s 0.25s ease both;
+}
+/* Logo image — top left */
+/* .logo-link {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+} */
+
+.logo-img {
+  /* margin-top: 10rem; */
+  height: 25rem;
+  width: auto;
+  left: 10rem;
+  top: 0rem;
+  position: fixed;
+  /* object-fit: contain; */
+}
+/* ── Brand block — fixed to top-left as a single unit */
+/* ── Smooth size transition on scroll */
+/* ── Logo — fixed top-left, shrinks toward top-left corner */
+.nav-brand {
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.75rem 1rem;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: top left;
+}
+
+.nav-brand--scrolled {
+  transform: scale(0.65);
+  opacity: 0.85;
+}
+
+
+/* Site name */
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: var(--titleFont);
+  color: var(--orange);
+  line-height: 1;
+  animation: fadeUp 0.8s 0.15s ease both;
+}
+
+/* Subtitle beneath site name */
+.nav-logo-sub {
+  font-family: 'Jost', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-align: left;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.nav-inner {
+  position: fixed;
+  right: 0;              /* ← pinned to top-right instead of top-left */
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 0.75rem 1rem;
+  align-items: flex-end;         /* ← text aligns to the right edge */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: top right;   /* ← shrinks toward the top-right corner */
+}
+
+.nav-inner--scrolled {
+  transform: scale(0.65);
+  opacity: 0.85;
+}
+
+/* ── Links — fixed top-right, shrinks toward top-right corner */
+.nav-links {
+  position: fixed;
+  right: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 0.75rem 1rem;
+  font-size: var(--headerFont);
+  align-items: flex-end;         /* text aligns to the right */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: top right;   /* shrinks toward the top-right corner */
+}
+
+.nav-links--scrolled {
+  transform: scale(0.65);
+  opacity: 0.85;
+}
+
+.nav-links a {
+  text-align: right;
+  position: relative;
+  color: var(--teal);
+  text-decoration: none;
+  padding: 0.25rem;
+  transition: color 0.2s;
+}
+
+/* Animated underline */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--orange);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover         { color: var(--orange); }
+.nav-links a:hover::after  { width: 100%; }
+.nav-links a.active        { color: var(--orange); }
+.nav-links a.active::after { background: var(--orange); width: 100%; }
+
+/* ============================================================
+   PAGE WRAPPER
+   ============================================================ */
+.page {
+  min-height: 100vh;
+  width: auto;
+  /* left:0; */
+  /* background-color: var(--bg); */
+  padding:2rem;
+  /* box-shadow: 0 100px 100px rgba(0, 0, 0, 0.1) ; */
+  /* border: #1a1a18 solid 1px ; */
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ============================================================
+   HOME — HERO
+   ============================================================ */
+
+.home-hero {
+  width: 100%;              /* ← take up 60% of the page from the right */
+  min-height: 600px;
+  /* padding: 5rem;  */
+  /* position: relative; */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.5rem, 7vw, 9rem);
+  font-weight: 600;
+  line-height: 0.9;
+  /* color: var(--text); */
+  text-align: center;
+  width: 100%;               /* ← lets text-align: right actually reach the edge */
+  /* max-width: 2000px; */
+  margin-bottom: 3rem;
+  animation: fadeUp 0.8s 0.15s ease both;
+  font-style: italic;
+  color: var(--orange);
+}
+
+.divider {
+  width: 800px;
+  height: 1.5px;
+  align-self: center;
+  margin-bottom: 3rem;
+  background: linear-gradient(to right, var(--teal), var(--orange));
+  animation: fadeUp 0.8s 0.25s ease both;
+}
+
+.hero-sub {
+  max-width: 700px;     
+  font-size: 1.25rem;
+  font-weight: 400;            /* lighter weight feels more editorial */
+  line-height: 1.85;
+  color: var(--muted);         /* muted instead of full text — less heavy */
+  text-align: left;
+  align-self: center;
+  margin-bottom: 5rem;
+  animation: fadeUp 0.8s 0.3s ease both;
+}
+
+.hero-btn {
+  display: inline-block;
+  padding: 0.85rem 2.5rem;
+  border: 1px solid var(--teal);   /* slightly thinner border feels more refined */
+  color: var(--teal);
+  background: transparent;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  align-items: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 40%;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+  animation: fadeUp 0.8s 0.45s ease both;
+}
+
+.hero-btn:hover {
+  background: var(--teal);
+  color: var(--bg);            /* uses bg color instead of #fff — warmer white */
+  border-color: var(--teal);
+}
+
+
+/* ============================================================
+   ABOUT — PAGE HEADER
+   ============================================================ */
+
+
+.about-page {
+  width: 60%;
+  /* padding: 5rem 4rem 7rem 1rem; */
+}
+
+.about-page-header {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.about-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 0.75rem;
+}
+
+.about-page-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--text);
+}
+
+.about-page-header p {
+  margin-top: 1rem;
+  max-width: 560px;
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--muted);
+}
+/* ============================================================
+   TEAM — SHARED
+   ============================================================ */
+
+.home-team {
+  width: 95%;              /* ← match hero width */
+  padding: 5rem 4rem 5rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+/* ============================================================
+   TEAM — GRID & ROWS
+   ============================================================ */
+
+.team-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.team-row {
+  display: flex;
+  flex-direction: row;       /* ← now horizontal to hold image + text side by side */
+  align-items: stretch;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  transition: background 0.3s;
+  overflow: hidden;
+}
+
+.team-row:first-child { border-top: 1px solid var(--border); }
+.team-row:hover       { background: var(--surface-warm); }
+
+/* Accent line — left for even, right for odd */
+.team-row--left::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--teal);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.team-row--right::before {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--orange);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.team-row:hover::before { opacity: 1; }
+
+
+/* ============================================================
+   TEAM — ALIGNMENT MODIFIERS
+   ============================================================ */
+
+.team-row--left {
+  flex-direction: row;           /* image on LEFT, text on right */
+  text-align: left;
+}
+
+.team-row--right {
+  flex-direction: row-reverse;   /* image on RIGHT, text on left */
+  text-align: left;
+}
+
+/* ============================================================
+   TEAM — IMAGE
+   ============================================================ */
+
+.team-img {
+  height: 400px;                /* ← adjust to taste */
+  padding: 2rem;
+  align-self: center;
+  opacity: 0.9;
+  box-shadow: inset 0 0 0 1px var(--border); /* subtle inner border to separate from bg */
+  flex-shrink: 0;
+  object-fit: cover;           /* fills the box without distorting */
+  object-position: top;        /* keeps faces in frame */
+  display: block;
+}
+
+
+/* ============================================================
+   TEAM — TEXT BLOCK
+   ============================================================ */
+
+.team-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.5rem 3rem;
+  flex: 1;                     /* fills remaining width */
+}
+
+.team-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: bold;
+  color: var(--teal);
+  margin-bottom: 0.2rem;
+  line-height: 1;
+}
+
+.team-row--right .team-name { color: var(--orange); }
+
+.team-role {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.team-bio {
+  font-size: var(--font-body);
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 500px;
+}
+
+/* ============================================================
+   TEAM — EDITORS EMERITUS
+   ============================================================ */
+
+.emeritus-section {
+  margin-top: 4rem;
+  padding-top: 4rem;
+  border-top: 1px solid var(--border);
+}
+
+.emeritus-section .about-label {
+  margin-bottom: 0.75rem;
+}
+
+.emeritus-section h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-style: italic;             /* matches hero-title italic style */
+  font-weight: 600;
+  color: var(--teal);             /* teal to balance the orange hero title */
+  margin-bottom: 1rem;
+  line-height: 0.95;
+}
+
+.emeritus-section .divider {
+  width: 100%;
+  height: 1.5px;
+  margin-bottom: 2.5rem;
+  background: linear-gradient(to right, var(--teal), var(--orange));
+}
+
+.emeritus-section .emeritus-intro {
+  font-size: var(--font-body);
+  font-weight: 400;
+  line-height: 1.85;
+  color: var(--muted);
+  max-width: 600px;
+  margin-bottom: 3rem;
+  display: flex;
+  width: 600px;
+  text-align:left;
+  margin-left: auto;
+  margin-right: auto;
+  align-self: center;
+}
+
+/* Grid of names — borderless, uses the 1px gap trick like the content cards */
+.emeritus-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 5px;
+  /* background: var(--border);     gap color becomes the border between cells */
+}
+
+.emeritus-item {
+  background: var(--bg);
+  padding: 1.75rem 2rem;
+  transition: background 0.25s;
+    border: #1a1a18 solid 1px   ;
+
+  position: relative;
+}
+
+/* Teal left bar slides in on hover — matches team-row and content-card pattern */
+.emeritus-item::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--teal);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.emeritus-item:nth-child(even)::before {
+  background: var(--orange);     /* alternates like content cards */
+}
+
+.emeritus-item:hover { background: var(--surface-warm); }
+.emeritus-item:hover::before { opacity: 1; }
+
+.emeritus-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 0.35rem;
+}
+
+.emeritus-info {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+
+/* ============================================================
+   CONTENT — LAYOUT & HEADER
+   ============================================================ */
+
+.content-layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 6rem 2rem;
+}
+
+.content-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 4rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.content-header-left .about-label { margin-bottom: 0.75rem; }
+
+.content-header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--text);
+}
+
+.content-count {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+
+/* ============================================================
+   CONTENT — CARD GRID
+   ============================================================ */
+
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1px;
+  background: var(--border);
+}
+
+.content-card {
+  position: relative;
+  background: var(--surface);
+  padding: 2.5rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+/* Coloured left bar on hover */
+.content-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 0;
+  background: var(--teal);
+  transition: height 0.3s ease;
+}
+
+.content-card:nth-child(even)::before { background: var(--orange); }
+
+.content-card:hover { background: var(--surface-warm); }
+.content-card:hover::before { height: 100%; }
+
+.card-tag {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1rem;
+}
+
+.content-card:nth-child(even) .card-tag { color: var(--orange); }
+
+.card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.45rem;
+  font-weight: 500;
+  line-height: 1.3;
+  flex-direction: flex-end;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+.card-desc {
+  font-size: 0.85rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.card-footer {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-warm);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.footer {
+  margin-top:3rem;
+
+  width: 100vw;
+  align-self: center;
+  background-color: var(--surface);
+}
+
+/* Gradient rule — same as .divider in the hero */
+.footer-divider {
+  width: 100%;
+  height: 1.5px;
+  background: linear-gradient(to right, var(--teal), var(--orange));
+}
+
+.footer-inner {
+  
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 3rem;
+  padding: 3rem 4rem;
+}
+
+/* ── Brand block */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.footer-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--orange);
+  line-height: 1;
+}
+
+.footer-sub {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── Nav links */
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-links a {
+  position: relative;
+  color: var(--teal);
+  font-size: 0.85rem;
+  font-weight: 400;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: color 0.2s;
+  width: fit-content;
+}
+
+/* Animated underline — matches navbar links */
+.footer-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--orange);
+  transition: width 0.3s ease;
+}
+
+.footer-links a:hover          { color: var(--orange); }
+.footer-links a:hover::after   { width: 100%; }
+
+/* ── Credit block */
+.footer-credit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  text-align: right;
+}
+
+.footer-credit span {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 300;
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.footer-copy {
+  font-family: 'Jost', sans-serif !important;
+  font-size: 0.62rem !important;
+  font-style: normal !important;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── FLOATING BOB ANIMATION ──────────────────────────────────
+   Controls the up/down float of the logo faces.
+   Change the translateY value to increase/decrease bob distance
+   (overrides the bobAmount prop — keep them in sync if you change both) */
+@keyframes bob {
+  0%, 100% { transform: translateX(-50%) translateY(0px); }
+  50%       { transform: translateX(-50%) translateY(-20px); }
+}
