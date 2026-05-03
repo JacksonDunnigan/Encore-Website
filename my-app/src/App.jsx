@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 
 import Home from "./pages/Home";
-import Featured from "./pages/Featured";
+import Featured from "./pages/WindowSeries";
 import Shop from "./pages/Shop";
 import Footer from "./Footer";
 import BobbingImage from "./BobbingImage";
@@ -38,7 +38,7 @@ function AppInner() {
         {/* ── Links — top right, shrinks toward top-right */}
         <div className={`nav-links ${scrolled ? 'nav-links--scrolled' : ''}`}>
           <NavLink to="/" end>Home</NavLink>
-          <NavLink to="/featured">Featured Works</NavLink>
+          <NavLink to="/featured">The Window Series</NavLink>
           <NavLink to="/shop">Shop</NavLink>
         </div>
       </nav>

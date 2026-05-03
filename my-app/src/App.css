@@ -801,3 +801,55 @@ body {
   0%, 100% { transform: translateX(-50%) translateY(0px); }
   50%       { transform: translateX(-50%) translateY(-20px); }
 }
+
+
+
+/* ============================================================
+   TEAM — MOBILE RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  .team-row,
+  .team-row--left,
+  .team-row--right {
+    flex-direction: column !important;
+    text-align: left;
+  }
+
+  .team-text {
+    padding: 1.5rem;
+  }
+
+  .team-bio {
+    max-width: 100%;
+  }
+
+  .divider {
+    width: 100%;
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+
+  .hero-sub {
+    max-width: 100%;
+  }
+
+
+ 
+  .team-img {
+    height: auto;
+    max-height: 350px;
+    width: auto;
+    max-width: 100%;
+    padding: 1rem 1rem 0 1rem;
+    object-fit: unset;
+    align-self: center;
+  }
+  /* Target the tall image specifically by its position in the grid */
+  .team-row:nth-child(1) .team-img {   /* change index to whichever row has the tall image */
+    object-position: center 30%;       /* nudge down slightly if the face is lower in the photo */
+  }
+}
