@@ -18,21 +18,35 @@ export default function Featured() {
         <p className="hero-sub">
           The Encore Poetry Project is now reopen to submissions in English and in French
           for our window display series! We will accept poems on a rolling basis, so please
-          get your poems in early! We don't currently have a deadline in mind, but like last
+          get your poems in early! We select a new poem every 2-3 weeks to be featured in the window.
+          We don't currently have a deadline in mind, but like last
           time, if we plan on closing submissions, we will announce the deadline in advance.
           The guidelines are mostly unchanged, but please go through them carefully before submitting:
         </p>
 
-      {/* <p className="hero-image-caption">The Window Series — Tiohià:ke / Montréal</p> */}
-        <p className="hero-sub">
-          <strong>Guidelines</strong><br /><br />
-          Poems must be 20 lines or less<br />
-          Send us max 2 poems at a time<br />
-          Poets must be Tiohià:ke/Montreal-based<br />
-          Email submissions as a Word or PDF attachment to encorepoetryproject@gmail.com<br />
-          Do not include your name in your attachment<br />
-          Writers of all backgrounds encouraged to submit!
-        </p>
+        {/* ── Guidelines + portrait side by side ── */}
+        <div className="guidelines-row">
+          <div style={{ flexDirection: 'column', display: 'flex' }}>
+            <p className="guidelines-text">
+              <strong>Guidelines</strong>
+            </p>
+            <ul className="guidelines-list">
+              <li>Poems must be 20 lines or less</li>
+              <li>Send us max 2 poems at a time</li>
+              <li>Poets must be Tiohià:ke/Montreal-based</li>
+              <li>Email submissions as a Word or PDF attachment to encorepoetryproject@gmail.com</li>
+              <li>Do not include your name in your attachment</li>
+              <li>Writers of all backgrounds encouraged to submit!</li>
+            </ul>
+          </div>
+          <div className="guidelines-portrait-wrapper">
+            <img
+              src="src/assets/storefront2.png"
+              alt="storefront with poetry"
+              className="guidelines-portrait"
+            />
+          </div>
+        </div>
 
         <p className="hero-sub">
           If we've already published you, please wait a year from your display date before

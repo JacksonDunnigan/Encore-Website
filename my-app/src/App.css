@@ -889,3 +889,69 @@ body {
     object-position: center 30%;       /* nudge down slightly if the face is lower in the photo */
   }
 }
+
+
+/* ============================================================
+   GUIDELINES — TWO-COLUMN LAYOUT
+   ============================================================ */
+
+.guidelines-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 3rem;
+  max-width: 700px;        /* wider to accommodate text + image */
+  align-self: center;
+  margin-bottom: 5rem;
+}
+
+.guidelines-portrait-wrapper {
+  flex-shrink: 0;
+  width: 320px;            /* more reasonable portrait width */
+  margin-top: 4rem;
+}
+
+.guidelines-portrait {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  object-position: top;
+}
+
+@media (max-width: 768px) {
+  .guidelines-row {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .guidelines-portrait-wrapper {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+.guidelines-text {
+  max-width: 700px;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.85;
+  color: var(--muted);
+  text-align: left;
+  margin: 0 0 0.75rem 0;
+}
+
+.guidelines-list {
+  list-style-type: disc;
+  list-style-position: outside;
+  padding-left: 1.25rem;
+  margin: 0;
+  text-align: left;
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1.85;
+  color: var(--muted);
+}
+
+.guidelines-list li {
+  margin-bottom: 0.35rem;
+}
