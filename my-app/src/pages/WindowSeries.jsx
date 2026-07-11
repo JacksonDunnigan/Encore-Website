@@ -18,7 +18,8 @@ export default function Featured() {
         <p className="hero-sub">
           The Encore Poetry Project is now reopen to submissions in English and in French
           for our window display series! We will accept poems on a rolling basis, so please
-          get your poems in early! We select a new poem every 2-3 weeks to be featured in the window.
+          get your poems in early! We select a new poem every 2-3 weeks to be featured in the window
+          at Encore Books and Records, located on 5670 Sherbrooke St W, Montreal, Quebec.
           We don't currently have a deadline in mind, but like last
           time, if we plan on closing submissions, we will announce the deadline in advance.
           The guidelines are mostly unchanged, but please go through them carefully before submitting:
@@ -47,7 +48,6 @@ export default function Featured() {
             />
           </div>
         </div>
-
         <p className="hero-sub">
           If we've already published you, please wait a year from your display date before
           submitting again. If you've submitted in the past and weren't accepted, we encourage
